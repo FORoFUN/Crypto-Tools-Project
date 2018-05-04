@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Let browswer know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Secure Your Message</title>
+    <!-- CSS  -->
+    <!-- Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Import materialize.css-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="/static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    {% block style %}
+    {% endblock %}
+</head>
+
+<body>
+    <header>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper light-blue">
+                    <a href="/" class="brand-logo center">Secure Your Message</a>
+                    <ul class="right hide-on-med-and-down">
+						{% if session.username is defined %}
+                        <li><a href="/home">{{ session.username }}</a></li>
+                        <li><a href="/request"><i class="material-icons right">add</i></a></li>
+                        <li><a href="/requests"><i class="material-icons right {% if requests|length > 0 %}red-text text-lighten-1{% endif %}">notifications</i></a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    	{% else %}
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/login">Login</a></li>
+                    	{% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+	<div class="container">
+    {% block content %}
+
+    {% endblock %}
+	</div>
+    </main>
+    <footer class="page-footer light-blue">
+        <div class="footer-copyright">
+            <div class="container">
+                Made with <a class="blue-grey-text text-darken-3" href="http://materializecss.com">Materialize</a>
+            </div>
+        </div>
+    </footer>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="/static/js/init.js"></script>
+	<script>
+	$(function() {
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+	      M.toast({html:'{{ message }}'}, 4000);
+	    {% endfor %}
+	  {% endif %}
+	{% endwith %}
+	});
+	</script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

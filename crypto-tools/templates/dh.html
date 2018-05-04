@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div>
+    <h3 class="page-title center" style="margin-bottom: 0px">Diffie Helman</h3>
+  </div>
+  <div class="row"></div>
+ 
+
+<div class="row">
+	<div class="card col s12">
+    <div class="card-tabs">
+      <ul class="tabs tabs-fixed-width">
+        <li class="tab"><a href="#encrypt">Encrypt</a></li>
+        <li class="tab"><a href="#decrypt">Decrypt</a></li>
+        <li class="tab"><a href="#construct">Construct Key</a></li>
+        <li class="tab"><a href="#generate">Generate Keys</a></li>
+      </ul>
+    </div>
+    <div class="card-content">
+      <div id="encrypt" class="row">
+		<form class="" action="/rsa/encrypt" method="POST">
+    	  <div class="row">
+    	    <div class="input-field col s6 offset-s3">
+    	      <i class="material-icons prefix">account_circle</i>
+    	      <select id="mode" type="text" class="validate" name="mode" required>
+				<option disabled selected></option>
+				<option>CBC</option>
+				<option>CTR</option>
+				<option>OFB</option>
+				<option>ECB</option>
+			  </select>
+    	      <label for="mode">Mode</label>
+    	    </div>
+    	  </div>
+		  <div class="row">
+    	    <div class="input-field col s6 offset-s3">
+    	      <i class="material-icons prefix">account_circle</i>
+    	      <select id="bits" type="text" class="validate" name="bits" required>
+				<option disabled selected></option>
+				<option>1024</option>
+				<option>2048</option>
+				<option>4096</option>
+			  </select>
+    	      <label for="bits">Bits</label>
+    	    </div>
+    	  </div>
+      	  <div class="row">
+      	    <div class="input-field col s6 offset-s3">
+      	      <i class="material-icons prefix">vpn_key</i>
+      	      <input id="key" type="text" class="validate" name="key" required>
+      	      <label for="key">Public Key</label>
+      	    </div>
+      	  </div>
+    	  <div class="row">
+    	    <div class="input-field col s6 offset-s3">
+    	      <i class="material-icons prefix">email</i>
+			  <textarea id="message" class="materialize-textarea"></textarea>
+    	      <label for="message">Message</label>
+    	    </div>
+    	  </div>
+    	  <div class="row">
+    	    <div class="center">
+    	      <button class="btn waves-effect waves-light" type="submit" name="action">Encrypt
+    	          <i class="material-icons right">send</i>
+    	      </button>
+    	    </div>
+    	  </div>
+    	</form>
+	  </div>
+
+	  <div id="decrypt" class="row">
+		<form class="" action="/rsa/decrypt" method="POST">
+		  <div class="row">
+    	    <div class="input-field col s6 offset-s3">
+    	      <i class="material-icons prefix">account_circle</i>
+    	      <select id="bits" type="text" class="validate" name="bits" required>
+				<option disabled selected></option>
+				<option>1024</option>
+				<option>2048</option>
+				<option>4096</option>
+			  </select>
+    	      <label for="bits">Bits</label>
+    	    </div>
+    	  </div>
+      	  <div class="row">
+      	    <div class="input-field col s6 offset-s3">
+      	      <i class="material-icons prefix">vpn_key</i>
+      	      <input id="key" type="text" class="validate" name="key" required>
+      	      <label for="key">Private Key</label>
+      	    </div>
+      	  </div>
+    	  <div class="row">
+    	    <div class="input-field col s6 offset-s3">
+    	      <i class="material-icons prefix">email</i>
+			  <textarea id="ciphertext" class="materialize-textarea"></textarea>
+    	      <label for="ciphertext">Ciphertext</label>
+    	    </div>
+    	  </div>
+    	  <div class="row">
+    	    <div class="center">
+    	      <button class="btn waves-effect waves-light" type="submit" name="action">Decrypt
+    	          <i class="material-icons right">send</i>
+    	      </button>
+    	    </div>
+    	  </div>
+    	</form>
+	  </div>
+	  <div id="construct" class="row">
+	    <form class="" action="/rsa/construct" method="POST">
+		<div class="row">
+      	    <div class="input-field col s6 offset-s3">
+      	      <i class="material-icons prefix">vpn_key</i>
+      	      <input id="p" type="text" class="validate" name="p" required>
+      	      <label for="p">p</label>
+      	    </div>
+      	</div>
+		<div class="row">
+      	    <div class="input-field col s6 offset-s3">
+      	      <i class="material-icons prefix">vpn_key</i>
+      	      <input id="q" type="text" class="validate" name="q" required>
+      	      <label for="q">q</label>
+      	    </div>
+      	</div>
+
+		<div class="row">
+      	    <div class="input-field col s6 offset-s3">
+      	      <i class="material-icons prefix">vpn_key</i>
+      	      <input id="N" type="text" class="validate" name="N" required>
+      	      <label for="N">Modulus (N)</label>
+      	    </div>
+      	</div>
+		<div class="row">
+      	    <div class="input-field col s6 offset-s3">
+      	      <i class="material-icons prefix">vpn_key</i>
+      	      <input id="e" type="text" class="validate" name="e" required>
+      	      <label for="e">e</label>
+      	    </div>
+		<div class="row">
+      	    <div class="input-field col s6 offset-s3">
+      	      <i class="material-icons prefix">vpn_key</i>
+      	      <input id="d" type="text" class="validate" name="d" required>
+      	      <label for="d">d</label>
+      	    </div>
+      	</div>
+      	</div>
+	  	<div class="row">
+	  	  <div class="center">
+	  		<button class="btn waves-effect waves-light" type="submit" name="action">Construct Key
+	  			<i class="material-icons right">send</i>
+	  		</button>
+	  	  </div>
+	  	</div>
+	    </form>
+	  </div> 
+	  <div id="generate" class="row">
+	  <form class="" action="/rsa/generate" method="POST">
+		<div class="row">
+		  <div class="input-field col s6 offset-s3">
+			<i class="material-icons prefix">account_circle</i>
+			<select id="bits" type="text" class="validate" name="bits" required>
+			  <option disabled selected></option>
+			  <option>1024</option>
+			  <option>2048</option>
+			  <option>4096</option>
+			</select>
+			<label for="bits">Bits</label>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="center">
+			<button class="btn waves-effect waves-light" type="submit" name="action">Generate Random Key
+				<i class="material-icons right">send</i>
+			</button>
+		  </div>
+		</div>
+	  </form>
+	</div> 
+	<div class="divider"></div>
+	<div class="row">
+		<div class="input-field col s6 offset-s3">
+		  <textarea disabled id="result" class="materialize-textarea"></textarea>
+    	  <label for="result">Result</label>
+    	</div>
+	</div>
+
+    </div>
+  	</div>
+	</div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+$('.tabs').tabs();
+$('select').formSelect();
+</script>
+{% endblock %}

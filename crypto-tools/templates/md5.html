@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div>
+    <h3 class="page-title center" style="margin-bottom: 0px">MD5</h3>
+  </div>
+  <div class="row"></div>
+ 
+
+<div class="row">
+	<div class="card col s12">
+    <div class="card-tabs">
+      <ul class="tabs tabs-fixed-width">
+        <li class="tab"><a href="#encrypt">Generate Hash</a></li>
+      </ul>
+    </div>
+    <div class="card-content">
+      <div id="encrypt" class="row">
+		<form class="" action="/md5" method="POST">
+    	  <div class="row">
+    	    <div class="input-field col s6 offset-s3">
+    	      <i class="material-icons prefix">email</i>
+			  <textarea id="message" name="message" class="materialize-textarea"></textarea>
+    	      <label for="message">Message</label>
+    	    </div>
+    	  </div>
+    	  <div class="row">
+    	    <div class="center">
+    	      <button class="btn waves-effect waves-light" type="submit" name="action">Generate Hash
+    	          <i class="material-icons right">send</i>
+    	      </button>
+    	    </div>
+    	  </div>
+    	</form>
+	  </div>
+
+	<div class="divider"></div>
+	<div class="row">
+		<div class="input-field col s6 offset-s3">
+		  <textarea disabled id="result" class="materialize-textarea">{% if result %}{{result}}{% endif %}</textarea>
+    	  <label for="result">Result</label>
+    	</div>
+	</div>
+
+    </div>
+  	</div>
+	</div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+$('.tabs').tabs();
+$('select').formSelect();
+</script>
+{% endblock %}
